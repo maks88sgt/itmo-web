@@ -20,27 +20,65 @@
         .carousel-image.active{
             opacity: 1;
         }
+        .separator{
+            width: 400px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
-    <div class="carousel">
-        <img class="carousel-image active" src="https://static.tildacdn.com/tild3932-3637-4233-b235-613362306535/4.jpg"/>
-        <img class="carousel-image" src="https://pic.rutubelist.ru/video/75/62/7562385dd0269bd26e08489efc3f0fd2.jpg"/>
-        <img class="carousel-image" src="https://www.multitour.ru/files/excursimgs/excurs_56909_201749_07.jpg"/>
-        <img class="carousel-image" src="https://i.pinimg.com/originals/94/d6/51/94d651d70c3702cb5a488365867d71d0.jpg"/>
-    </div>
+    <div class="parent"></div>
+    <div class="separator">Lorem ipsum</div>
+    <div class="parent2"></div>
     <script>
         const images = document.querySelectorAll(".carousel-image")
-        let currentImageIndex = 0
+        
+        function crerateImgList(parentElementSelector, images, options = {}){
+            const parentElement = document.querySelector(parentElementSelector)
+            const carousel = document.createElement("div")
+            carousel.classList.add("carousel")
+            parentElement.appendChild(carousel)
+            carousel.style.width = options.width ?? "400px"
+            carousel.style.height = options.height ?? "300px"
 
-        function changeImage(){
-            console.log(">>>>>>", currentImageIndex)
-            images[currentImageIndex].classList.remove("active")
-            currentImageIndex = (currentImageIndex + 1) % images.length
-            images[currentImageIndex].classList.add("active")
+            images.forEach((item, index)=>{
+                const image = document.createElement("img")
+                image.src = item
+                image.classList.add("carousel-image")
+                if (index === 0){
+                    image.classList.add("active")
+                }
+                carousel.appendChild(image)
+            })
+
+            const carouselImages = document.querySelectorAll(`${parentElementSelector} .carousel-image`)
+
+            let currentImageIndex = 0
+
+            function changeImage(){
+                carouselImages[currentImageIndex].classList.remove("active")
+                currentImageIndex = (currentImageIndex + 1) % carouselImages.length
+                carouselImages[currentImageIndex].classList.add("active")
+            }
+
+            setInterval(changeImage, options?.interval ?? 1000)
         }
 
-        setInterval(changeImage, 1000)
+        const links=[
+            "https://static.tildacdn.com/tild3932-3637-4233-b235-613362306535/4.jpg",
+            "https://pic.rutubelist.ru/video/75/62/7562385dd0269bd26e08489efc3f0fd2.jpg",
+            "https://www.multitour.ru/files/excursimgs/excurs_56909_201749_07.jpg",
+            "https://i.pinimg.com/originals/94/d6/51/94d651d70c3702cb5a488365867d71d0.jpg"
+        ]
+
+        const links2 = [
+            "https://astrus.ru/upload/iblock/e47/nv4ovmb0uow8jifl0yzovwiap93o61lh.JPG",
+            "https://bigtrip.by/storage/organizations/1777/tcj2fmw2.jpg"
+
+        ]
+
+        crerateImgList(".parent", links2)
+        crerateImgList(".parent3", links, {interval: 3000, width: "800px", height: "600px"})
     </script>
 </body>
 
