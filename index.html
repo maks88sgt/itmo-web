@@ -30,8 +30,17 @@
         <img class="carousel-image" src="https://i.pinimg.com/originals/94/d6/51/94d651d70c3702cb5a488365867d71d0.jpg"/>
     </div>
     <script>
-        const images = document.querySelector(".carousel")
-        console.log(">>>>>>", images)
+        const images = document.querySelectorAll(".carousel-image")
+        let currentImageIndex = 0
+
+        function changeImage(){
+            console.log(">>>>>>", currentImageIndex)
+            images[currentImageIndex].classList.remove("active")
+            currentImageIndex = (currentImageIndex + 1) % images.length
+            images[currentImageIndex].classList.add("active")
+        }
+
+        setInterval(changeImage, 1000)
     </script>
 </body>
 
