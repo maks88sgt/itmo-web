@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carousel</title>
+    <style>
+        .parent{
+            width: 400px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            background-color: turquoise;
+        }
+        .children{
+            width: 30%;
+            height: 30%;
+            background-color: green;
+            transition: opacity 0.75s ease-in;
+        }
+        .clicked{
+            background-color: red;
+        }
+        .small-div{
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background-color: red;
+        }
+        .bomb {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            opacity: 0;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent"></div>
+    <input class="input" type="text">
+    <a href="/colors.html" target="_blank">some link</a>
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        const parent = document.querySelector(".parent")
+        const bomb = document.createElement("div")
+        bomb.classList.add("bomb")
+        bomb.style.left = `${getRandomInt(0, parent.getBoundingClientRect().width)}px`
+        bomb.style.top = `${getRandomInt(0, parent.getBoundingClientRect().height)}px`
+        parent.appendChild(bomb)
+        parent.addEventListener("click", function(event){
+            const smallDiv = document.createElement("div")
+            smallDiv.classList.add("small-div")
+            smallDiv.style.left = `${event.offsetX - 15}px`
+            smallDiv.style.top = `${event.offsetY - 15}px`
+            parent.appendChild(smallDiv)
+            const {x: bombX, y: bombY} = bomb.getBoundingClientRect()
+            const {x: userX, y: userY} = smallDiv.getBoundingClientRect()
+            console.log(bombX, bombY, userX, userY)
+
+            if(event.target.classList.contains("bomb")){
+                bomb.style.opacity = 1
+                alert("You lucky")
+            }
+            if ( bombX - userX <= 30 && bombX - userX >= 0 && bombY - userY <= 30 && bombY - userY >= 0){
+                alert("You lucky")
+            }
+        })
+        console.log(bomb.getBoundingClientRect())
+
+    </script>
+</body>
+
+</html>
