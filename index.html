@@ -41,6 +41,16 @@
             carousel.style.width = options.width ?? "400px"
             carousel.style.height = options.height ?? "300px"
 
+
+            const buttonLeft = document.createElement("button")  
+            const buttonRight = document.createElement("button") 
+            buttonLeft.innerHTML = "left"
+            buttonRight.innerHTML = "right"
+
+            parentElement.appendChild(buttonLeft)
+            parentElement.appendChild(buttonRight)
+
+
             images.forEach((item, index)=>{
                 const image = document.createElement("img")
                 image.src = item
@@ -61,7 +71,28 @@
                 carouselImages[currentImageIndex].classList.add("active")
             }
 
-            setInterval(changeImage, options?.interval ?? 1000)
+            let interval = setInterval(changeImage, options?.interval ?? 1000)
+
+            buttonLeft.onclick = function(){
+                carouselImages[currentImageIndex].classList.remove("active")
+                currentImageIndex  = (currentImageIndex - 1) % carouselImages.length
+                if (currentImageIndex < 0) {
+                    currentImageIndex = carouselImages.length -1
+                }
+                carouselImages[currentImageIndex].classList.add("active")
+                clearInterval(interval)
+            }
+            buttonRight.addEventListener("click", function(){
+                carouselImages[currentImageIndex].classList.remove("active")
+                currentImageIndex  = (currentImageIndex + 1) % carouselImages.length
+                carouselImages[currentImageIndex].classList.add("active")
+                clearInterval(interval)
+            })
+            buttonRight.addEventListener("click", function () {
+                this.
+                console.log(">>>>>>>>>>>>>>>>")
+            })
+
         }
 
         const links=[
@@ -77,8 +108,8 @@
 
         ]
 
-        crerateImgList(".parent", links2)
-        crerateImgList(".parent3", links, {interval: 3000, width: "800px", height: "600px"})
+        crerateImgList(".parent", links)
+        //crerateImgList(".parent2", links, {interval: 3000, width: "800px", height: "600px"})
     </script>
 </body>
 

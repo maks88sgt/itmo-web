@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .todo-list {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+        .column {
+            flex: 1;
+            padding: 20px;
+            margin: 0 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+        }
+        .column h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .task {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: grab;
+            text-align: center;
+        }
+        .task.dragging {
+            opacity: 0.5;
+        }
+        .column.over {
+            border: 2px dashed #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="todo-list">
+    <div class="column" id="todo">
+        <h2>To Do</h2>
+        <div class="task" id="task1" draggable="true">Task 1</div>
+        <div class="task" id="task2" draggable="true">Task 2</div>
+        <div class="task" id="task3" draggable="true">Task 3</div>
+    </div>
+    <div class="column" id="in-progress">
+        <h2>In Progress</h2>
+    </div>
+    <div class="column" id="done">
+        <h2>Done</h2>
+    </div>
+</div>
+
+<script>
+    const tasks = document.querySelectorAll(".task")
+
+    tasks.forEach((task)=>{
+        task.addEventListener("dragstart", (event)=>{
+            event.dataTransfer.setData("text/plain", event.target.id)
+            event.target.classList.add("dragging")
+        })
+        task.addEventListener("dragend", (event)=>{
+            console.log("22222222", event.target.id)
+        })
+    })
+
+    const columns = document.querySelectorAll(".column")
+
+    columns.forEach((column)=>{
+        column.addEventListener("dragover", (event)=>{
+            event.preventDefault()
+            event.target.classList.add("over")
+        })
+        column.addEventListener("dragleave", (event)=>{
+            event.preventDefault()
+            event.target.classList.remove("over")
+        })
+        column.addEventListener("drop", (event)=>{
+            event.preventDefault()
+            const draggable = document.querySelector(
+                `#${event.dataTransfer.getData("text/plain")}`
+                )
+            if(event.target.classList.contains("column")){
+                draggable.classList.remove("dragging")
+                event.target.appendChild(draggable)
+                event.target.classList.remove("over")
+            }
+        
+        })
+    })
+
+    
+</script>
+
+</body>
+</html>

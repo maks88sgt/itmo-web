@@ -52,6 +52,12 @@
         bomb.style.top = `${getRandomInt(0, parent.getBoundingClientRect().height)}px`
         parent.appendChild(bomb)
         parent.addEventListener("click", function(event){
+            const customEvent = new CustomEvent("someCustomEvent", 
+                {detail: {customEventData: "test", someAnotherValue: 4}}
+            )
+
+            bomb.dispatchEvent(customEvent)
+
             const smallDiv = document.createElement("div")
             smallDiv.classList.add("small-div")
             smallDiv.style.left = `${event.offsetX - 15}px`
@@ -70,6 +76,11 @@
             }
         })
         console.log(bomb.getBoundingClientRect())
+
+        bomb.addEventListener("someCustomEvent", function(ev){
+            console.log("custom event triggered")
+            console.log(ev)
+        })
 
     </script>
 </body>
