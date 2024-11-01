@@ -39,6 +39,9 @@
       background-color: #ccc;
       cursor: pointer;
     }
+    .red{
+      background-color: red;
+    }
   </style>
 </head>
 <body>
@@ -46,9 +49,9 @@
   <div class="container">
     <h1>Color Picker</h1>
     <div class="palette">
-      <div class="color-option" style="background-color: red;" data-color="red"></div>
+      <div class="color-option red" data-color="red"></div>
       <div class="color-option" style="background-color: blue;" data-color="blue"></div>
-      <div class="color-option" style="background-color: green;" data-color="green"></div>
+      <div class="color-option green" style="background-color: green;" data-color="green"></div>
       <div class="color-option" style="background-color: yellow;" data-color="yellow"></div>
     </div>
     <div class="grid">
@@ -65,17 +68,40 @@
 
   <script>
     let selectedColor = 'red'; // По умолчанию выбран красный
+
+    
   
 
-    const container = document.querySelector(".container")
-    container.addEventListener("click", function(ev){
-      const dataColor = ev.target.getAttribute("data-color")
-      if(dataColor){
-        selectedColor = dataColor
-      } else if (ev.target.classList.contains("block")) {
-        ev.target.style.background = selectedColor
-      }
+    var currentBgColor;
+let red = document.querySelector('.red');
+let blue = document.querySelector('.blue');
+let green = document.querySelector('.green');
+let violet = document.querySelector('.violet');
+let scCards = document.querySelectorAll('.sc__card');
+// let scCard = document.querySelector('.sc__card');
+
+red.addEventListener('click', function(){
+    console.log("from red", this.style.background)
+    const currentStyle = getComputedStyle(this)
+    console.log(currentStyle.backgroundColor)
+
+    currentBgColor = '#ff0000';
+})
+green.addEventListener('click', function(){
+    console.log("from green", this.style)
+    currentBgColor = '#008000';
+})
+blue.addEventListener('click', function(){
+    currentBgColor = '#0000ff';
+})
+violet.addEventListener('click', function(){
+    currentBgColor = '#ee82ee';
+})
+scCards.forEach((card) => {
+    card.addEventListener('click', function(){
+        this.style.backgroundColor = currentBgColor;
     })
+})
 
 
   

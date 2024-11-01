@@ -31,85 +31,19 @@
     <div class="separator">Lorem ipsum</div>
     <div class="parent2"></div>
     <script>
-        const images = document.querySelectorAll(".carousel-image")
-        
-        function crerateImgList(parentElementSelector, images, options = {}){
-            const parentElement = document.querySelector(parentElementSelector)
-            const carousel = document.createElement("div")
-            carousel.classList.add("carousel")
-            parentElement.appendChild(carousel)
-            carousel.style.width = options.width ?? "400px"
-            carousel.style.height = options.height ?? "300px"
+        const user = {
+  name: "Simple User",
+  sayHi: ()=>{
+    console.log(this.name)
+  }
+}
 
+const superUser = function (){
+  const name = "superUser"
+  user.sayHi()
+}
 
-            const buttonLeft = document.createElement("button")  
-            const buttonRight = document.createElement("button") 
-            buttonLeft.innerHTML = "left"
-            buttonRight.innerHTML = "right"
-
-            parentElement.appendChild(buttonLeft)
-            parentElement.appendChild(buttonRight)
-
-
-            images.forEach((item, index)=>{
-                const image = document.createElement("img")
-                image.src = item
-                image.classList.add("carousel-image")
-                if (index === 0){
-                    image.classList.add("active")
-                }
-                carousel.appendChild(image)
-            })
-
-            const carouselImages = document.querySelectorAll(`${parentElementSelector} .carousel-image`)
-
-            let currentImageIndex = 0
-
-            function changeImage(){
-                carouselImages[currentImageIndex].classList.remove("active")
-                currentImageIndex = (currentImageIndex + 1) % carouselImages.length
-                carouselImages[currentImageIndex].classList.add("active")
-            }
-
-            let interval = setInterval(changeImage, options?.interval ?? 1000)
-
-            buttonLeft.onclick = function(){
-                carouselImages[currentImageIndex].classList.remove("active")
-                currentImageIndex  = (currentImageIndex - 1) % carouselImages.length
-                if (currentImageIndex < 0) {
-                    currentImageIndex = carouselImages.length -1
-                }
-                carouselImages[currentImageIndex].classList.add("active")
-                clearInterval(interval)
-            }
-            buttonRight.addEventListener("click", function(){
-                carouselImages[currentImageIndex].classList.remove("active")
-                currentImageIndex  = (currentImageIndex + 1) % carouselImages.length
-                carouselImages[currentImageIndex].classList.add("active")
-                clearInterval(interval)
-            })
-            buttonRight.addEventListener("click", function () {
-                this.
-                console.log(">>>>>>>>>>>>>>>>")
-            })
-
-        }
-
-        const links=[
-            "https://static.tildacdn.com/tild3932-3637-4233-b235-613362306535/4.jpg",
-            "https://pic.rutubelist.ru/video/75/62/7562385dd0269bd26e08489efc3f0fd2.jpg",
-            "https://www.multitour.ru/files/excursimgs/excurs_56909_201749_07.jpg",
-            "https://i.pinimg.com/originals/94/d6/51/94d651d70c3702cb5a488365867d71d0.jpg"
-        ]
-
-        const links2 = [
-            "https://astrus.ru/upload/iblock/e47/nv4ovmb0uow8jifl0yzovwiap93o61lh.JPG",
-            "https://bigtrip.by/storage/organizations/1777/tcj2fmw2.jpg"
-
-        ]
-
-        crerateImgList(".parent", links)
-        //crerateImgList(".parent2", links, {interval: 3000, width: "800px", height: "600px"})
+superUser()
     </script>
 </body>
 
