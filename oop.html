@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carousel</title>
+</head>
+<body>
+    <div class="parent"></div>
+    <button id="addField">Add field</button>
+    <script>
+       class Component {
+        constructor(querySelector){
+            this.container = document.querySelector(querySelector)
+        }
+
+        render(content){
+            if(this.container){
+                this.container.innerHTML = content
+            } else {
+                console.error("Container not found")
+            }
+        }
+       }
+
+       class FormComponent extends Component {
+        constructor(querySelector, fields){
+            super(querySelector)
+            this.fields = fields ?? {}
+            this.fieldsValues = {}
+            this.onSubmit = this.onSubmit.bind(this)
+        }
+
+        addField(field){
+            this.fields = {...this.fields, [field.name]: {...field}}
+        }
+
+        onSubmit(event){
+            event.preventDefault()
+            const formData = {}
+            for (const key in this.fields){
+                console.log(key, event.target[key].value)
+                formData[key] = event.target[key].value
+            }
+            console.log("Form submitted", formData)
+        }
+
+        renderForm(){
+            let form = '<form>'
+            for (const key in this.fields){
+                const {type, name, label} = this.fields[key]
+                form += `
+                    <label for=${key} >${label}</label>
+                    <input type=${type} id=${key} name=${name}>
+                    </br>
+                `
+            }
+            form += `<button type="submit">Submit</button></form>`
+            return form   
+        }
+
+        render(){
+            const formContent = this.renderForm()
+            super.render(formContent)
+            this.container.querySelector("form").addEventListener("submit", this.onSubmit)
+        }
+       }
+       
+
+       const ourForm = new FormComponent(".parent")
+
+       ourForm.render()
+
+       const addFieldButton = document.querySelector("#addField")
+       addFieldButton.addEventListener("click", ()=>{
+        const fieldLength = Object.keys(ourForm.fields)?.length ?? 0
+        ourForm.addField({name: `newField${fieldLength+1}`, type: "text", label: `new Field${fieldLength+1}`})
+        ourForm.render()
+    })
+
+    </script>
+</body>
+
+</html>
