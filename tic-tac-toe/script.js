@@ -1,10 +1,18 @@
 import GameModel from "./JS/GameModel.js"
 import GameView from "./JS/GameView.js"
 import GameController from "./JS/GameController.js"
+try {
+    let num = 5;
+    num.toUpperCase(); // Ошибка, т.к. toUpperCase не подходит для числа
+} catch (error) {
+    console.dir(error);
+}
 
 const view = new GameView("#gameBoard")
 const model = new GameModel()
 const controller = new GameController(model, view)
+
+localStorage.getItem("something")
 
 
 // let board = new Array(9).fill("")

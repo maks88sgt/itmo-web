@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Combined Async and Defer</title>
+    <script src="analytics.js" defer></script>
+    <script>
+        console.log("Скрипт выполнен из head", Date.now());
+    </script>
+    <script src="main.js" async></script> 
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <script>
+        console.log("Скрипт выполнен из body", Date.now());
+    </script>
+</body>
+</html>
