@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #container {
+      position: relative;
+      width: 600px;
+      height: 200px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    .box {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    #boxTimeout {
+      background-color: blue;
+      top: 50px;
+    }
+    #boxRAF {
+      background-color: red;
+      top: 120px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Animation Comparison: setTimeout vs requestAnimationFrame</h1>
+  <p>Use the buttons below to run the animations separately or simultaneously for comparison.</p>
+  <div id="container">
+    <div id="boxTimeout" class="box"></div>
+    <div id="boxRAF" class="box"></div>
+  </div>
+  <button onclick="startSetTimeout()">Start setTimeout Animation</button>
+  <button onclick="startRequestAnimationFrame()">Start requestAnimationFrame Animation</button>
+  <button onclick="startBothAnimations()">Start Both Animations</button>
+
+  <script>
+    const containerWidth = 600;
+    const boxSize = 50;
+    const speed = 2; // Speed in pixels per frame
+
+    function resetPositions() {
+      document.getElementById('boxTimeout').style.left = '0px';
+      document.getElementById('boxRAF').style.left = '0px';
+    }
+
+    function startSetTimeout() {
+      resetPositions();
+      const boxTimeout = document.getElementById('boxTimeout');
+      let position = 0;
+
+      function animate() {
+        if (position < containerWidth - boxSize) {
+          position += speed; // Move 2px per frame
+          boxTimeout.style.left = position + 'px';
+          setTimeout(animate, 17); // Approx. 60 fps
+        }
+      }
+
+      animate();
+    }
+
+    function startRequestAnimationFrame() {
+      resetPositions();
+      const boxRAF = document.getElementById('boxRAF');
+      let position = 0;
+
+      function animate() {
+        if (position < containerWidth - boxSize) {
+          position += speed; // Move 2px per frame
+          boxRAF.style.left = position + 'px';
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+    function startBothAnimations() {
+      resetPositions();
+
+      // setTimeout Animation
+      const boxTimeout = document.getElementById('boxTimeout');
+      let positionTimeout = 0;
+
+      function animateWithTimeout() {
+        if (positionTimeout < containerWidth - boxSize) {
+          positionTimeout += speed; // Move 2px per frame
+          boxTimeout.style.left = positionTimeout + 'px';
+          setTimeout(animateWithTimeout, 16); // Approx. 60 fps
+        }
+      }
+
+      // requestAnimationFrame Animation
+      const boxRAF = document.getElementById('boxRAF');
+      let positionRAF = 0;
+
+      function animateWithRAF() {
+        if (positionRAF < containerWidth - boxSize) {
+          positionRAF += speed; // Move 2px per frame
+          boxRAF.style.left = positionRAF + 'px';
+          requestAnimationFrame(animateWithRAF);
+        }
+      }
+
+      // Start both
+      animateWithTimeout();
+      animateWithRAF();
+    }
+  </script>
+</body>
+</html>

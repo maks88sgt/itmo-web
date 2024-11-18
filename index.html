@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Carousel</title>
     <style>
-        .carousel{
-            width: 400px;
-            height: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-        .carousel-image{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            opacity: 0;
-            transition: opacity 0.75s ease-in;
-        }
-        .carousel-image.active{
-            opacity: 1;
-        }
-        .separator{
-            width: 400px;
-            height: 100px;
-        }
+      .carousel {
+        width: 400px;
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+      }
+      .carousel-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.75s ease-in;
+      }
+      .carousel-image.active {
+        opacity: 1;
+      }
+      .separator {
+        width: 400px;
+        height: 100px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="parent"></div>
     <div class="separator">Lorem ipsum</div>
     <div class="parent2"></div>
+    <button id="getData">Click me</button>
     <script>
-        const user = {
-  name: "Simple User",
-  sayHi: ()=>{
-    console.log(this.name)
-  }
-}
-
-const superUser = function (){
-  const name = "superUser"
-  user.sayHi()
-}
-
-superUser()
+      const button = document.querySelector("#getData");
+      button.addEventListener("click", () => {
+        fetch("https://freefakeapi.io/api/users").then(res=>{
+            return res.json()
+        }).then(responseData=>{
+            fetch(`https://freefakeapi.io/api/posts/${responseData[0].id}`).then(
+                (res)=>res.json()
+            ).then((data=>console.log(data.length)))
+        })
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+          method: "POST",
+          body: JSON.stringify({
+            title: "foo123",
+            body: "itmo web",
+            userId: 1,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => {
+            console.log("response", response)
+            if(!response.ok){
+                throw new Error("Failed request")
+            }
+            response.json()
+        })
+          .then((json) => console.log("json", json))
+          .catch((err) => console.log("Catch",err.type))
+          .finally(()=>console.log("Finally"));
+      });
     </script>
-</body>
-
+  </body>
 </html>
