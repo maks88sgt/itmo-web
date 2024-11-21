@@ -1,5 +1,6 @@
 import { multy } from "./utils.js"
 import {c} from "./helpers.js"
+import './scss/styles.scss';
 
 const variable = 123
 
