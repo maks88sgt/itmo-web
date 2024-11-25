@@ -9,8 +9,16 @@ module.exports = {
     filename: 'bundle.js',
     clean: true, // Очистка папки dist перед каждой сборкой
   },
+  // resolve: {
+  //   extensions: ['.ts', '.js'], // Расширения файлов, которые обрабатывает Webpack
+  // },
   module: {
     rules: [
+      // {
+      //   test: /\.ts$/, // Все файлы .ts
+      //   use: 'ts-loader', // Используем ts-loader
+      //   exclude: /node_modules/, // Исключаем node_modules
+      // },
       {
         test: /\.m?js$/, // Обработка JavaScript
         exclude: /node_modules/,
@@ -51,3 +59,16 @@ module.exports = {
     compress: true,
   },
 };
+
+
+// {
+//   "compilerOptions": {
+//     "outDir": "./dist",
+//     "module": "ESNext",
+//     "target": "ES5",
+//     "moduleResolution": "node",
+//     "strict": true,
+//     "esModuleInterop": true
+//   },
+//   "include": ["src/**/*"]
+// }
