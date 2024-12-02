@@ -14,11 +14,11 @@ module.exports = {
   // },
   module: {
     rules: [
-      // {
-      //   test: /\.ts$/, // Все файлы .ts
-      //   use: 'ts-loader', // Используем ts-loader
-      //   exclude: /node_modules/, // Исключаем node_modules
-      // },
+      {
+        test: /\.ts$/, // Все файлы .ts
+        use: 'ts-loader', // Используем ts-loader
+        exclude: /node_modules/, // Исключаем node_modules
+      },
       {
         test: /\.m?js$/, // Обработка JavaScript
         exclude: /node_modules/,
@@ -61,14 +61,3 @@ module.exports = {
 };
 
 
-// {
-//   "compilerOptions": {
-//     "outDir": "./dist",
-//     "module": "ESNext",
-//     "target": "ES5",
-//     "moduleResolution": "node",
-//     "strict": true,
-//     "esModuleInterop": true
-//   },
-//   "include": ["src/**/*"]
-// }
