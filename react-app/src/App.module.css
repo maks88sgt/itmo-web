@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.component {
+  color: blue;
+}
+
+.test {
+  text-transform: capitalize;
+}
+
+.default {
+  background-color: red
+}
