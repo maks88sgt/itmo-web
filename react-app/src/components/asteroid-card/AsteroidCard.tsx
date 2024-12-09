@@ -21,7 +21,7 @@ export const AsteroidCard = (
 
   return (
     <div className={`${style.card} ${isDangerous ? style.dangerous : ""}`}>
-      <AsteroidCardImage />
+      <AsteroidCardImage {...props}/>
       <AsteroidCardData {...props} />
       <AsteroidCardButton  {...props} />
     </div>
