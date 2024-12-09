@@ -5,3 +5,13 @@
 .option {
     cursor: pointer
 }
+
+.listHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.onlyDangerous{
+    cursor: pointer
+}

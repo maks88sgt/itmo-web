@@ -1,5 +1,7 @@
-.App {
+.app {
   text-align: center;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .component {

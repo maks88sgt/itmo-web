@@ -33,3 +33,5 @@ export function generateAsteroids(count: number){
     const toTime = to.getTime();
     return new Date(fromTime + Math.random() * (toTime - fromTime));
   }
+
+  export const mockAsteroids = generateAsteroids(5)

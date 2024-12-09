@@ -15,31 +15,15 @@ export interface AsteroidCardProps {
 }
 
 export const AsteroidCard = (
-  props: AsteroidCardProps & {
-    setDestroyment: Dispatch<AsteroidCardProps[]>;
-  }
+  props: AsteroidCardProps
 ) => {
-  const { isDangerous, setDestroyment } = props;
+  const { isDangerous } = props;
 
   return (
     <div className={`${style.card} ${isDangerous ? style.dangerous : ""}`}>
       <AsteroidCardImage />
       <AsteroidCardData {...props} />
-      <AsteroidCardButton
-        onClick={() =>
-          setDestroyment(
-            //@ts-ignore
-            (destroyment: AsteroidCardProps[]) => {
-              if (destroyment.some((it) => it.name === props.name)) {
-                return destroyment.filter((it) => it.name === props.name);
-              } else {
-                destroyment.push(props);
-                return destroyment
-              }
-            }
-          )
-        }
-      />
+      <AsteroidCardButton  {...props} />
     </div>
   );
 };
