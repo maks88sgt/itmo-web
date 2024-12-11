@@ -3,6 +3,7 @@ import { AsteroidCardButton } from "./AsteroidCardButton";
 import { AsteroidCardData } from "./AsteroidCardData";
 import { AsteroidCardImage } from "./AsteroidCardImage";
 import style from "./card.module.scss";
+import { Link } from "react-router-dom";
 
 export interface AsteroidCardProps {
   isDangerous: boolean;
@@ -14,16 +15,16 @@ export interface AsteroidCardProps {
   isKilometers: boolean;
 }
 
-export const AsteroidCard = (
-  props: AsteroidCardProps
-) => {
+export const AsteroidCard = (props: AsteroidCardProps) => {
   const { isDangerous } = props;
 
   return (
-    <div className={`${style.card} ${isDangerous ? style.dangerous : ""}`}>
-      <AsteroidCardImage {...props}/>
-      <AsteroidCardData {...props} />
-      <AsteroidCardButton  {...props} />
-    </div>
+    <Link to={`/asteroids/${props.name}`}>
+      <div className={`${style.card} ${isDangerous ? style.dangerous : ""}`}>
+        <AsteroidCardImage {...props} />
+        <AsteroidCardData {...props} />
+        <AsteroidCardButton {...props} />
+      </div>
+    </Link>
   );
 };

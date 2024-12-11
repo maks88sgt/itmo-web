@@ -1,6 +1,9 @@
-import type { Dispatch, SetStateAction } from "react"
+import { NavLink } from "react-router-dom";
 
-export const AppHeader = ({setIsAsteroids}: {setIsAsteroids: Dispatch<SetStateAction<boolean>>})=>{
-    return <><span onClick={()=>setIsAsteroids(true)}>Asteroids</span>
-    <span onClick={()=>setIsAsteroids(false)}>Destroyment</span></>
-}
+export const AppHeader = () => {
+  return (
+    <div style={{height: "50px"}}>
+      <NavLink to="/asteroids">Asteroids</NavLink> <NavLink to="/destroyment" >Destroyment</NavLink>
+    </div>
+  );
+};

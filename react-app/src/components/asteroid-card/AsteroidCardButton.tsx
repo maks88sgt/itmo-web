@@ -20,7 +20,9 @@ export const AsteroidCardButton = (props: AsteroidCardProps) => {
       </div>
       <button
         className={styles.action}
-        onClick={() => {
+        onClick={(ev) => {
+          ev.stopPropagation();
+          ev.preventDefault()
           dispatch({type: "SET_ASTEROIDS_TO_DESTROYMENT", payload: props})
         }}
       >

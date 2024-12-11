@@ -13,18 +13,36 @@ import {
 } from "./components/asteroid-card/AsteroidCard";
 import styles from "./App.module.css";
 import { AppHeader } from "./components/app-header/AppHeader";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
+import { appRouter } from "./router/appRouter";
+import { Asteroid } from "./components/Asteroid";
+import { Asteroids } from "./components/Asteroids";
+import { Destroyment } from "./components/Destroyment";
 
 const initialAppState: {
+  asteroids: AsteroidCardProps[];
   asteroidsToDestroyment: AsteroidCardProps[];
   isKilometers: boolean;
   isOnlyDangerous: boolean;
-} = { asteroidsToDestroyment: [], isKilometers: true, isOnlyDangerous: false };
+} = {
+  asteroids: [],
+  asteroidsToDestroyment: [],
+  isKilometers: true,
+  isOnlyDangerous: false,
+};
 
 export const AsteroidContext = createContext<{
   appState: {
     asteroidsToDestroyment: AsteroidCardProps[];
     isKilometers: boolean;
     isOnlyDangerous: boolean;
+    asteroids:  AsteroidCardProps[];
   };
   dispatch: Dispatch<{ type: string; payload?: any }>;
 }>({ appState: { ...initialAppState }, dispatch: (arg: any) => null });
@@ -34,6 +52,11 @@ const appReducer = (
   action: { type: string; payload?: any }
 ) => {
   switch (action.type) {
+    case "SET_ASTEROIDS":
+      return {
+        ...state,
+        asteroids: action.payload,
+      };
     case "SET_ASTEROIDS_TO_DESTROYMENT":
       const isInDestroyment = !!state.asteroidsToDestroyment.find(
         (it) => it.name === action.payload.name
@@ -53,7 +76,6 @@ const appReducer = (
           action.payload,
         ],
       };
-
     case "SET_IS_KILOMETERS":
       return { ...state, isKilometers: action.payload };
     case "SET_IS_ONLY_DANGEROUS":
@@ -64,7 +86,6 @@ const appReducer = (
 };
 
 export const App = () => {
-  const [isAsteroids, setIsAsteroids] = useState(true);
   const [appState, dispatch] = useReducer(appReducer, initialAppState);
 
   return (
@@ -75,18 +96,16 @@ export const App = () => {
       }}
     >
       <div className={styles.app}>
-        <AppHeader setIsAsteroids={setIsAsteroids} />
-        {isAsteroids ? (
-          <AsteroidsList />
-        ) : (
-          <div>
-            {appState.asteroidsToDestroyment.map(
-              (asteroid: AsteroidCardProps) => (
-                <AsteroidCard key={asteroid.name} {...asteroid} />
-              )
-            )}
-          </div>
-        )}
+        <BrowserRouter>
+          <AppHeader />
+          <Routes>
+            <Route path="/" element={<Navigate to="/asteroids" />} />
+            <Route path="/asteroids" element={<Asteroids />} />
+            <Route path="/destroyment" element={<Destroyment />} />
+            <Route path="/asteroids/:id" element={<Asteroid />} />
+            <Route path="*" element={<Navigate to="/asteroids" />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </AsteroidContext.Provider>
   );
