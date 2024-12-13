@@ -1,5 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { AsteroidCardProps } from "../components/asteroid-card/AsteroidCard";
+import dayjs from "dayjs";
+
+const apiKey = process.env.REACT_APP_API_KEY
 
 class ApiClient {
   private axios: AxiosInstance;
@@ -8,8 +11,12 @@ class ApiClient {
     this.axios = axios.create({ baseURL });
   }
 
-  async getAsteroids() {
-    return (await this.axios.get("/feed?api_key=Ckd5fr6UC15jwzFqCCrgHCia5pqSb5NDE2fM9WQl")).data.near_earth_objects["2024-12-11"].map(this.adaptAsteroid);
+  async getAsteroids(date?: string) {
+    let startDate = date;
+    if(!startDate) {
+      startDate = dayjs(Date.now()).format("YYYY-MM-DD") as string
+    }
+    return (await this.axios.get(`/feed?api_key=${apiKey}&start_date=${startDate}&&end_date=${startDate}`)).data.near_earth_objects[startDate].map(this.adaptAsteroid);
   }
 
   private adaptAsteroid = (asteroid: any): Partial<AsteroidCardProps> => {
