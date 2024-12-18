@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import { AsteroidContext } from "../App";
 import { AsteroidsList } from "./asteroids-list/AsteroidsList";
+import { useDispatch } from "../store/useDispatch";
+import { useSelector } from "../store/useSelector";
 
 export const Destroyment = ()=>{
-    const {
-        appState: { isKilometers, isOnlyDangerous, asteroidsToDestroyment },
-        dispatch,
-      } = useContext(AsteroidContext);
+      const {
+          isKilometers, isOnlyDangerous, asteroidsToDestroyment
+        } = useSelector(store=>store);
+
+      const dispatch = useDispatch()
     
       return (
         <div>

@@ -1,14 +1,17 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { AsteroidContext } from "../App";
+import { useEffect, useRef, useState } from "react";
 import { AsteroidsList } from "./asteroids-list/AsteroidsList";
 import ApiClient from "../api/ApiClient";
 import dayjs from "dayjs";
+import { useStore } from "../store/StoreProvider";
+import { useDispatch } from "../store/useDispatch";
+import { useSelector } from "../store/useSelector";
 
 export const Asteroids = () => {
   const {
-    appState: { isKilometers, isOnlyDangerous, asteroids },
-    dispatch,
-  } = useContext(AsteroidContext);
+    isKilometers, isOnlyDangerous, asteroids
+  } = useSelector(store=>store);
+
+  const dispatch = useDispatch()
 
   const [date, setDate] = useState(dayjs(Date.now()).format("YYYY-MM-DD"));
 

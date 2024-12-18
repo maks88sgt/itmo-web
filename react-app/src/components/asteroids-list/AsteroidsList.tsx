@@ -1,10 +1,10 @@
-import { Dispatch } from "react";
 import { AsteroidCard, AsteroidCardProps } from "../asteroid-card/AsteroidCard";
 import style from "./list.module.scss";
+import { Action } from "../../store/store";
 
 export const AsteroidsList = (props: {
   isOnlyDangerous: boolean;
-  dispatch: Dispatch<{ type: string; payload?: any }>;
+  dispatch: (action: Action) => void;
   isKilometers: boolean;
   asteroids: AsteroidCardProps[];
 }) => {
