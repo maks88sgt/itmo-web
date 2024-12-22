@@ -1,0 +1,54 @@
+name: CI/CD Pipeline for React App in Subfolder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Шаг 1: Клонирование репозитория
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Шаг 2: Установка Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    # Шаг 3: Установка зависимостей
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./react-app
+
+    # Шаг 4: Запуск линтера
+    - name: Run linter
+      run: npm run lint
+      working-directory: ./react-app
+
+    # Шаг 5: Запуск тестов
+    - name: Run tests
+      run: npm test
+      working-directory: ./react-app
+
+    # Шаг 6: Сборка проекта
+    - name: Build project
+      run: npm run build
+      working-directory: ./react-app
+
+    # Шаг 7: Настройка гит
+    - name: Configure Git
+      run: |
+        git config --global user.email "maks88sgt@yandex.com"
+        git config --global user.name "maks88sgt"
+
+    # Шаг 8: Деплой на GitHub Pages
+    - name: Deploy to GitHub Pages
+      run: npm run deploy
+      working-directory: ./react-app
+      env:
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.DEPLOY_TOKEN  }}
