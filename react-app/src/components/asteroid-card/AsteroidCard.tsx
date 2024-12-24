@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
-import { AsteroidCardButton } from "./AsteroidCardButton";
 import { AsteroidCardData } from "./AsteroidCardData";
 import { AsteroidCardImage } from "./AsteroidCardImage";
 import style from "./card.module.scss";
 import { Link } from "react-router-dom";
+import { AsteroidCardButtonContainer } from "./AsteroidCardButtonContainer";
 
 export interface AsteroidCardProps {
   isDangerous: boolean;
@@ -23,7 +22,7 @@ export const AsteroidCard = (props: AsteroidCardProps) => {
       <div className={`${style.card} ${isDangerous ? style.dangerous : ""}`}>
         <AsteroidCardImage {...props} />
         <AsteroidCardData {...props} />
-        <AsteroidCardButton {...props} />
+        <AsteroidCardButtonContainer {...props} />
       </div>
     </Link>
   );

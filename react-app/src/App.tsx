@@ -6,7 +6,6 @@ import { Asteroids } from "./components/Asteroids";
 import { Destroyment } from "./components/Destroyment";
 import StoreProvider from "./store/StoreProvider";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { orange } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
