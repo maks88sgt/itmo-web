@@ -20,9 +20,6 @@ jobs:
       with:
         node-version: 18
 
-    - name: Navigate to react app directory
-      working-directory: ./react-app
-
     # Шаг 3: Установка зависимостей
     - name: Install dependencies
       run: npm install
