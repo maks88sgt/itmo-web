@@ -40,6 +40,11 @@ jobs:
       run: npm run build
       working-directory: ./react-app
 
+    - name: Config git
+      run: |
+        git config --global user.email "maks88st@yandex.com"
+        git config --global user.name "Maks Dro"
+
     # Шаг 7: Деплой на GitHub Pages
     - name: Deploy to GitHub Pages
       run: npm run deploy
