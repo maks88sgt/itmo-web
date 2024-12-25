@@ -19,7 +19,7 @@ export const Asteroids = () => {
       dispatch({ type: "SET_ASTEROIDS", payload: [...asteroids, ...data] });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date, dispatch]);
+  }, [date]);
 
   const infiniteScrollRef = useRef(null);
 
