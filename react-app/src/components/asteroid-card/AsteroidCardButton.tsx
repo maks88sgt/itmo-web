@@ -25,7 +25,7 @@ export const AsteroidCardButton = (
         onClick={(ev) => {
           ev.stopPropagation();
           ev.preventDefault();
-          dispatch({ type: "SET_ASTEROIDS_TO_DESTROYMENT", payload: {...props } });
+          dispatch({ type: "SET_ASTEROIDS_TO_DESTROYMENT", payload: {...props  } });
         }}
         data-testId={ADD_TO_DESTROYMENT}
       >

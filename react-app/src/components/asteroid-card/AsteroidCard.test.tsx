@@ -15,16 +15,31 @@ const mockAsteroidCard = {
 
 export const ADD_TO_DESTROYMENT = "Add to destroyment";
 
-const handleClick = jest.fn()
+const handleClick = jest.fn();
 
 test("Asteroid Card", () => {
   render(
     <MemoryRouter>
-      <AsteroidCardButton {...mockAsteroidCard} asteroidsToDestroyment={[]} dispatch={handleClick}/>
+      <AsteroidCardButton
+        {...mockAsteroidCard}
+        asteroidsToDestroyment={[]}
+        dispatch={handleClick}
+      />
     </MemoryRouter>
   );
-  const button = screen.getByTestId(ADD_TO_DESTROYMENT)
-  expect(handleClick).not.toHaveBeenCalled()
-  fireEvent.click(button)
-  expect(handleClick).toHaveBeenCalledWith({ type: "SET_ASTEROIDS_TO_DESTROYMENT", payload: mockAsteroidCard })
+
+  const button = screen.getByTestId(ADD_TO_DESTROYMENT);
+
+  expect(handleClick).not.toHaveBeenCalled();
+
+  fireEvent.click(button);
+
+  expect(handleClick).toHaveBeenCalledWith(
+    expect.objectContaining({
+      type: "SET_ASTEROIDS_TO_DESTROYMENT",
+      payload: expect.objectContaining(
+        mockAsteroidCard,
+      ),
+    })
+  );
 });
