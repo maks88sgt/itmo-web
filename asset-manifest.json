@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/itmo-web/static/css/main.1f0beedb.css",
-    "main.js": "/itmo-web/static/js/main.5a960325.js",
+    "main.js": "/itmo-web/static/js/main.1c86a272.js",
     "static/media/asteroid-medium.svg": "/itmo-web/static/media/asteroid-medium.959396c2483c994b4a7330c475719287.svg",
     "static/media/asteroid-big.svg": "/itmo-web/static/media/asteroid-big.cb9fa595367718038cef56a29fd8d185.svg",
     "index.html": "/itmo-web/index.html",
     "main.1f0beedb.css.map": "/itmo-web/static/css/main.1f0beedb.css.map",
-    "main.5a960325.js.map": "/itmo-web/static/js/main.5a960325.js.map"
+    "main.1c86a272.js.map": "/itmo-web/static/js/main.1c86a272.js.map"
   },
   "entrypoints": [
     "static/css/main.1f0beedb.css",
-    "static/js/main.5a960325.js"
+    "static/js/main.1c86a272.js"
   ]
 }
