@@ -51,3 +51,4 @@ jobs:
       working-directory: ./react-app
       env:
         DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
