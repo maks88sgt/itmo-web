@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import dayjs from "dayjs";
-import { AsteroidCardButton } from "./AsteroidCardButton";
+import { ADD_TO_DESTROYMENT, AsteroidCardButton } from "./AsteroidCardButton";
 
 const mockAsteroidCard = {
   isDangerous: true,
@@ -12,8 +12,6 @@ const mockAsteroidCard = {
   radius: 123,
   isKilometers: true,
 };
-
-export const ADD_TO_DESTROYMENT = "Add to destroyment";
 
 const handleClick = jest.fn();
 

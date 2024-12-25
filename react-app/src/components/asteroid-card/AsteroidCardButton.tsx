@@ -1,7 +1,8 @@
 import styles from "./card.module.scss";
 import { AsteroidCardProps } from "./AsteroidCard";
-import { ADD_TO_DESTROYMENT } from "./AsteroidCard.test";
 import { store } from "../../store/store";
+
+export const ADD_TO_DESTROYMENT = "Add to destroyment";
 
 export const AsteroidCardButton = (
   props: AsteroidCardProps & {
