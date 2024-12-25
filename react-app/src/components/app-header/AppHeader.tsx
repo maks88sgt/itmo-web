@@ -15,7 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 
-const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const AppHeader = () => {

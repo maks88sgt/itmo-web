@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { AsteroidsList } from "./asteroids-list/AsteroidsList";
 import ApiClient from "../api/ApiClient";
 import dayjs from "dayjs";
-import { useStore } from "../store/StoreProvider";
 import { useDispatch } from "../store/useDispatch";
 import { useSelector } from "../store/useSelector";
 
@@ -19,7 +18,8 @@ export const Asteroids = () => {
     ApiClient.getAsteroids(date).then((data) => {
       dispatch({ type: "SET_ASTEROIDS", payload: [...asteroids, ...data] });
     });
-  }, [date]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, dispatch]);
 
   const infiniteScrollRef = useRef(null);
 
@@ -67,7 +67,7 @@ export const Asteroids = () => {
     }
 
     return () => observer.disconnect();
-  }, [asteroids]);
+  }, [asteroids, date]);
 
   return (
     <div style={{position: "relative"}}>
