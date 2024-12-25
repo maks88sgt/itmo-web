@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { AsteroidCardProps } from "../components/asteroid-card/AsteroidCard";
 import dayjs from "dayjs";
 
-const apiKey = process.env.REACT_APP_API_KEY
+//const apiKey = process.env.REACT_APP_API_KEY
 
 class ApiClient {
   private axios: AxiosInstance;
