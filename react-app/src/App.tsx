@@ -20,7 +20,7 @@ export const App = () => {
     <StoreProvider>
       <ThemeProvider theme={theme}>
         <div className={styles.app}>
-          <BrowserRouter basename="/itmo-web">
+          <BrowserRouter>
             <AppHeader />
             <Routes>
               <Route path="/" element={<Navigate to="/asteroids" />} />
