@@ -6,7 +6,7 @@ WORKDIR /app
 
 # 3. Копируем package.json и устанавливаем зависимости
 COPY react-app/package*.json ./
-RUN npm install
+RUN npm install --legacy-pper-dependency
 
 # 4. Копируем все файлы из папки с React-приложением и собираем проект
 COPY react-app/ ./
