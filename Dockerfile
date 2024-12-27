@@ -21,5 +21,6 @@ COPY --from=build /app/build /usr/share/nginx/html
 # 7. Открываем порт 80
 EXPOSE 80
 
+
 # 8. Запускаем Nginx
 CMD ["nginx", "-g", "daemon off;"]
